@@ -124,3 +124,28 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: darkturquoise;
+}
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    color: darkslategray;
+    margin-top: 15px;
+}
+
+.card p {
+    font-size: 1.1em;
+}
