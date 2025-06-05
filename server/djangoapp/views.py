@@ -1,21 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
-import logging
 import json
+import logging
 
 from .models import CarMake, CarModel
 from .populate import initiate
 
-# Logger setup
 logger = logging.getLogger(__name__)
 
 
-# ---------- LOGIN ----------
 @csrf_exempt
 def login_user(request):
     data = json.loads(request.body)
@@ -31,14 +26,12 @@ def login_user(request):
     return JsonResponse(response)
 
 
-# ---------- LOGOUT ----------
 @csrf_exempt
 def logout_request(request):
     logout(request)
     return JsonResponse({"status": "Logged out"})
 
 
-# ---------- REGISTRATION ----------
 @csrf_exempt
 def registration(request):
     data = json.loads(request.body)
@@ -51,7 +44,6 @@ def registration(request):
     return JsonResponse({"status": "User created"})
 
 
-# ---------- GET CARS ----------
 def get_cars(request):
     count = CarMake.objects.count()
     if count == 0:
@@ -59,4 +51,3 @@ def get_cars(request):
     car_models = CarModel.objects.select_related('make')
     cars = [{"CarModel": c.name, "CarMake": c.make.name} for c in car_models]
     return JsonResponse({"CarModels": cars})
-
